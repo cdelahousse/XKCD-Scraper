@@ -7,7 +7,6 @@ while 	((COMICNO += 1))
 	fi
 	source=`curl -s http://www.xkcd.com/$COMICNO/ | grep -m 1 "http://imgs.xkcd.com/comics/"`
 	#echo $source
-	if
 	if [ $source == '' ]; then #all done! No more left to download
 		exit
 	fi
@@ -23,8 +22,9 @@ while 	((COMICNO += 1))
 		alt=${alt#<*title=\"}
 		alt=${alt%%\"*>}
 		echo  $alt >> $COMICNO.txt
+		#filanme: ###-name.jpg
 		wget -q -O "$COMICNO-$filename".jpg $img
 
-		sleep 1
+		sleep 1 #Rate limiting as to not stress Randal Monroe's server. Be nice kids!
 
 	done
